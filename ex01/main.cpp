@@ -13,7 +13,6 @@ int main(void)
 	{
 		std::cout << "Enter command!\nADD, SEARCH or EXIT!" << std::endl;
 		std::getline(std::cin, cmd);
-		std::cout << cmd << std::endl;
 		if (!cmd.compare("ADD"))
 			myPhoneBook.add_contact();
 		if (!cmd.compare("SEARCH"))

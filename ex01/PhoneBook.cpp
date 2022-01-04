@@ -2,6 +2,7 @@
 
 PhoneBook::PhoneBook()
 {
+	this->amount = 0;
 }
 
 PhoneBook::~PhoneBook()
@@ -22,7 +23,7 @@ void	PhoneBook::add_contact()
 void	PhoneBook::show()
 {
 	std::cout << "|     Index|First name| Last name|  Nickname|    Number|" << std::endl;
-	for (int i = 0; i < this->amount; i++)
+	for (unsigned int i = 0; i < this->amount; i++)
 	{
 		std::cout << "|" << std::setw(10) << i + 1<< "|";
 		if (this->contacts[i].get_first_name().length() > 9)
@@ -60,12 +61,17 @@ void	PhoneBook::search()
 		this->show();
 		while (true)
 		{
-			std::cout << "Enter an index of searching contact" << std::endl;
+			std::cout << "Enter an index of searching contact or 0 to exit" << std::endl;
 			if ((std::cin >> index) && index - 1 < this->amount)
 			{
 				this->show_contact(index - 1);
 				std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
 				break ;
+			}
+			else if (index == 0)
+			{
+				std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
+				break;
 			}
 			else
 			{
