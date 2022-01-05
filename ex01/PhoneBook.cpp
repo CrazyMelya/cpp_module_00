@@ -3,6 +3,7 @@
 PhoneBook::PhoneBook()
 {
 	this->amount = 0;
+	this->current = 0;
 }
 
 PhoneBook::~PhoneBook()
@@ -11,13 +12,12 @@ PhoneBook::~PhoneBook()
 
 void	PhoneBook::add_contact()
 {
-	if (this->amount < 8)
-	{
-		this->contacts[this->amount].set_information();
+	this->contacts[this->current].set_information();
+	if (amount < 8)
 		amount++;
-	}
-	else
-		std::cout << "Phonebook is ful!" << std::endl;
+	current++;
+	if (current == 8)
+		current = 0;
 }
 
 void	PhoneBook::show()
@@ -62,16 +62,20 @@ void	PhoneBook::search()
 		while (true)
 		{
 			std::cout << "Enter an index of searching contact or 0 to exit" << std::endl;
-			if ((std::cin >> index) && index - 1 < this->amount)
+			if ((std::cin >> index) && (index == 0 || index - 1 < this->amount))
 			{
-				this->show_contact(index - 1);
-				std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
-				break ;
-			}
-			else if (index == 0)
-			{
-				std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
-				break;
+				if (index - 1 < this->amount)
+				{
+					this->show_contact(index - 1);
+					std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
+					break ;
+				}
+				else
+				{
+					std::cin.clear();
+					std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
+					break ;
+				}
 			}
 			else
 			{

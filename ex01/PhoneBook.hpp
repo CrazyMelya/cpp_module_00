@@ -11,7 +11,8 @@ class PhoneBook
 {
 	private:
 		Contact contacts[8];
-		unsigned int		amount;
+		unsigned int	amount;
+		unsigned int	current;	
 	public:
 		PhoneBook();
 		~PhoneBook();
